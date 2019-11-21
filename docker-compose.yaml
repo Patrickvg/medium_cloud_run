@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+
+  server:
+    image: medium-article-cloud-run
+    build:
+      context: ./src
+      dockerfile: ./Dockerfile
+    container_name: medium-article-cloud-run
+    hostname: medium-article-cloud-run
+    environment:
+      - PYTHONUNBUFFERED=0
+    ports:
+      - "8080:8080"

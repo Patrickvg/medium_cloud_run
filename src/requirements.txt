@@ -1,0 +1,10 @@
+flask
+numpy
+pandas; python_version >= '3.5'
+pandas<0.21; python_version == '3.4'
+scipy
+scikit-learn
+statsmodels; python_version >= '3.5'
+statsmodels<0.9; python_version == '3.4'
+beautifulsoup4
+flake8
