@@ -4,7 +4,10 @@ import pickle
 import os
 
 app = Flask(__name__)
-model = pickle.load(open('./src/model.pkl', 'rb'))
+try:
+    model = pickle.load(open('./model.pkl', 'rb'))
+except FileNotFoundError:
+    model = pickle.load(open('./src/model.pkl', 'rb'))
 
 
 @app.route('/')

@@ -1,0 +1,23 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  entrypoint: 'bash'
+  args: [
+    '-c',
+    'docker pull gcr.io/$PROJECT_ID/medium-article-cloud-run:latest || exit 0',
+  ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-t', 'gcr.io/$PROJECT_ID/medium-article-cloud-run',
+    '--cache-from', 'gcr.io/$PROJECT_ID/medium-article-cloud-run:latest',
+    './src',
+  ]
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [
+    'beta', 'run', 'deploy', 'medium-article-cloud-run',
+    '--image', 'gcr.io/$PROJECT_ID/medium-article-cloud-run',
+    '--region', 'europe-west1',
+    '--platform', 'managed'
+  ]
+images:
+- 'gcr.io/$PROJECT_ID/medium-article-cloud-run'
